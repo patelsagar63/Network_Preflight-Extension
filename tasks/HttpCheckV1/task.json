@@ -1,0 +1,24 @@
+{
+  "id": "e0c5c9a7-6f4b-4f0a-9b2a-1f7d4b93c2a1",
+  "name": "HttpCheck",
+  "friendlyName": "Network Preflight: HTTP(S) Check",
+  "description": "Validate HTTP/S reachability and latency from the agent.",
+  "helpMarkDown": "Docs: See extension README in the Marketplace listing.",
+  "category": "Utility",
+  "author": "Azure DevOps Support",
+  "visibility": [ "Build", "Release" ],
+  "demands": [],
+  "version": { "Major": 1, "Minor": 0, "Patch": 2 },
+  "minimumAgentVersion": "2.221.0",
+  "instanceNameFormat": "HTTP Check: $(method) $(targets)",
+  "inputs": [
+    { "name": "targets", "type": "multiLine", "label": "Targets (URLs)", "required": true, "helpMarkDown": "List of URLs, one per line" },
+    { "name": "method", "type": "pickList", "label": "Method", "options": { "HEAD": "HEAD", "GET": "GET" }, "defaultValue": "HEAD", "required": true },
+    { "name": "timeoutSeconds", "type": "string", "label": "Timeout (seconds)", "defaultValue": "10" },
+    { "name": "retries", "type": "string", "label": "Retries", "defaultValue": "0" },
+    { "name": "respectProxyEnv", "type": "boolean", "label": "Respect HTTP(S)_PROXY / NO_PROXY env", "defaultValue": "true" },
+    { "name": "expectStatus", "type": "string", "label": "Expected status range(s)", "defaultValue": "200-399" },
+    { "name": "maxLatencyMs", "type": "string", "label": "Max latency (ms, 0 = ignore)", "defaultValue": "0" }
+  ],
+  "execution": { "Node20_1": { "target": "index.js" } }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "c3b589a3-13a6-41d4-9c61-2b5f44bf02af",
+  "name": "TcpProbe",
+  "friendlyName": "Network Preflight: TCP Probe",
+  "description": "Attempt a TCP connect (with optional TLS/SNI) to host:port.",
+  "category": "Utility",
+  "author": "Azure DevOps Support",
+  "visibility": [ "Build", "Release" ],
+  "version": { "Major": 1, "Minor": 0, "Patch": 2 },
+  "minimumAgentVersion": "2.221.0",
+  "instanceNameFormat": "TCP Probe: $(targets)",
+  "inputs": [
+    { "name": "targets", "type": "multiLine", "label": "Targets (host:port)", "required": true },
+    { "name": "timeoutSeconds", "type": "string", "label": "Timeout (seconds)", "defaultValue": "10" },
+    { "name": "useTls", "type": "boolean", "label": "Use TLS", "defaultValue": "false" },
+    { "name": "serverName", "type": "string", "label": "SNI server name (if TLS)", "required": false }
+  ],
+  "execution": { "Node20_1": { "target": "index.js" } }
+}

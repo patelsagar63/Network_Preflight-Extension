@@ -1,0 +1,13 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# VSIX artifacts
+*.vsix
+
+# OS/editor
+.DS_Store
+Thumbs.db
+
+# Build outputs (JS compiled next to TS; keep TS tracked)

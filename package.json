@@ -1,0 +1,28 @@
+{
+  "name": "network-preflight",
+  "version": "1.0.0",
+  "description": "Azure DevOps extension that validates HTTP, DNS, and TCP connectivity from pipeline agents before critical releases.",
+  "private": true,
+  "license": "MIT",
+  "author": "Sagar Patel",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "clean": "git clean -fdX",
+    "compile": "tsc -p tsconfig.json",
+    "bundle": "npx ncc build tasks/HttpCheckV1/index.js -o tasks/HttpCheckV1 && npx ncc build tasks/DnsLookupV1/index.js -o tasks/DnsLookupV1 && npx ncc build tasks/TcpProbeV1/index.js -o tasks/TcpProbeV1",
+    "build": "npm run compile && npm run bundle",
+    "validate": "grep -Rni \"azure-pipelines-task-lib\" tasks/*/index.js || echo \"✅ Bundled correctly\"",
+    "package": "npm run build && tfx extension create --manifest-globs vss-extension.json --rev-version",
+    "release": "npm run package"
+  },
+  "dependencies": {
+    "azure-pipelines-task-lib": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "@vercel/ncc": "^0.38.3",
+    "typescript": "^5.6.3"
+  }
+}
